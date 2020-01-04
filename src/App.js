@@ -29,7 +29,7 @@ function Entries() {
     return <>
         <h3>Bisherige Einträge</h3>
         <table className="table table-striped">
-            <tbody id="content">Keine</tbody>
+            <tbody id="content"></tbody>
         </table>
     </>;
 }
