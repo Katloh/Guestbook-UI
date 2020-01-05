@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {EntryForm} from "./components/EntryForm";
+import {getEntries} from "./services/GuestBookAPI";
 
 function App(props) {
 
     const [entries, setEntries] = useState([])
 
-    useEffect(() => {
+    useEffect(() => {           //Arrow Function
         loadAndSetEntries()
-    }, [])
+    }, [])                  //[] = keine Dependency
 
-    return (
+    return (                //<Header/> = Aufruf Funktion Header
 
         <div className="App">
 
@@ -24,15 +25,7 @@ function App(props) {
     );
 
     async function loadAndSetEntries() {
-        const response = await fetch("http://localhost:8080/guestbook", {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const data = await response.json()
+        const data = await getEntries()
         setEntries(data)
     }
 }
@@ -65,7 +58,6 @@ function Entries(props) {
                     <td>{entry.commenter}</td>
                 </tr>))
             }
-
 
             </tbody>
         </table>

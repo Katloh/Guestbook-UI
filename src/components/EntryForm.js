@@ -1,24 +1,18 @@
 import React, {useState} from "react";
+import {putEntry} from "../services/GuestBookAPI";
 
 export function EntryForm(props) {
 
     const [formState, setFormState] = useState({title: "", comment: "", commenter: ""})
     const [isSent, setSended] = useState(false)
 
-    async function handleSubmit() {
+    async function handleSubmit(event) {
+        event.preventDefault()
 
         if (formState.title === "" || formState.comment === "" || formState.commenter === "") {
             window.alert("Bitte alle Felder ausfüllen")
         } else {
-            await fetch("http://localhost:8080/guestbook", {
-                method: 'PUT',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formState)
-            });
-
+            await putEntry(formState)
             setSended(true)
             props.onEntryAdded()
         }
@@ -43,7 +37,7 @@ export function EntryForm(props) {
 
     } else {
 
-        return <form className="form-vertical" onSubmit={handleSubmit}>
+        return <form className="form-vertical">
             <div className="form-group">
                 <div className="row">
                     <label className="col-sm-2 control-label" htmlFor="title">Title</label>
@@ -75,7 +69,7 @@ export function EntryForm(props) {
 
             <div className="rows">
                 <div className="col-sm-10 col-sm-offset-2">
-                    <input type="submit" id="send" className="btn btn-success"/>
+                    <button className="btn btn-success"onClick={handleSubmit}>Eintragen</button>
                 </div>
             </div>
         </form>
