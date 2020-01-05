@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {EntryForm} from "./components/EntryForm";
+import {Entries} from "./components/Entries";
 import {getEntries} from "./services/GuestBookAPI";
 
 function App(props) {
@@ -36,32 +37,6 @@ function Header() {
             <h2>Gästebuch</h2>
         </div>
     </div>;
-}
-
-function Entries(props) {
-    return <>
-        <h3>Bisherige Einträge</h3>
-        <table className="table">
-            <thead>
-            <tr>
-                <th scope="col">Titel</th>
-                <th scope="col">Comment</th>
-                <th scope="col">Commenter</th>
-            </tr>
-            </thead>
-            <tbody>
-            {props.entries.map(entry =>
-
-                (<tr>
-                    <td>{entry.title}</td>
-                    <td>{entry.comment}</td>
-                    <td>{entry.commenter}</td>
-                </tr>))
-            }
-
-            </tbody>
-        </table>
-    </>;
 }
 
 export default App;
