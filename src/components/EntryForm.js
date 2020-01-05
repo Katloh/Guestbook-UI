@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {putEntry} from "../services/GuestBookAPI";
 
-export function EntryForm(props) {
+export function EntryForm({onEntryAdded}) {
 
     const [formState, setFormState] = useState({title: "", comment: "", commenter: ""})
     const [isSent, setSended] = useState(false)
@@ -14,7 +14,7 @@ export function EntryForm(props) {
         } else {
             await putEntry(formState)
             setSended(true)
-            props.onEntryAdded()
+            onEntryAdded()
         }
     }
 
