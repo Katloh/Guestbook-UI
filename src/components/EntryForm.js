@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export function EntryForm() {
+export function EntryForm(props) {
 
     const [formState, setFormState] = useState({title: "", comment: "", commenter: ""})
     const [isSent, setSended] = useState(false)
@@ -20,6 +20,7 @@ export function EntryForm() {
             });
 
             setSended(true)
+            props.onEntryAdded()
         }
     }
 
@@ -42,7 +43,7 @@ export function EntryForm() {
 
     } else {
 
-        return <form className="form-vertical">
+        return <form className="form-vertical" onSubmit={handleSubmit}>
             <div className="form-group">
                 <div className="row">
                     <label className="col-sm-2 control-label" htmlFor="title">Title</label>
@@ -74,8 +75,7 @@ export function EntryForm() {
 
             <div className="rows">
                 <div className="col-sm-10 col-sm-offset-2">
-                    <a id="send" className="btn btn-success" onClick={handleSubmit}>Speichern</a>
-                    <a href="index.html" className="btn btn-default">Abbrechen</a>
+                    <input type="submit" id="send" className="btn btn-success"/>
                 </div>
             </div>
         </form>
